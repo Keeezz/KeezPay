@@ -1,0 +1,52 @@
+{
+    "name": "keez/keezpay",
+    "description": "A PHP library for payment solutions",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "authors": [
+        {
+            "name": "delhombre",
+            "email": "brunodogbase@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "KeezPay\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "KeezPay\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "extra": {
+        "symfony": {
+            "allow-contrib": false,
+            "require": "6.1"
+        }
+    },
+    "require": {
+        "php": ">=8.1.0",
+        "psr/event-dispatcher": "^1.0",
+        "symfony/password-hasher": "^6.1",
+        "symfony/uid": "^6.1",
+        "symfony/validator": "^6.1"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.9",
+        "phpstan/phpstan-deprecation-rules": "^1.0",
+        "phpstan/phpstan-phpunit": "^1.2",
+        "phpstan/phpstan-strict-rules": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "symfony/messenger": "^6.1"
+    }
+}
