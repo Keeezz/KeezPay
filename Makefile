@@ -15,3 +15,6 @@ fix:
 	$(DISABLE_XDEBUG) php vendor/bin/php-cs-fixer fix
 
 qa: fix analyse
+
+tests-wc:
+	$(DISABLE_XDEBUG) php vendor/bin/phpunit --no-coverage
