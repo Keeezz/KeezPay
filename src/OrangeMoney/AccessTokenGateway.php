@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace KeezPay\OrangeMoney;
 
-interface AccessTokenGateway
+use KeezPay\Shared\Gateway;
+
+interface AccessTokenGateway extends Gateway
 {
     public function requestAccessToken(string $customerKey): ?AccessToken;
 }
