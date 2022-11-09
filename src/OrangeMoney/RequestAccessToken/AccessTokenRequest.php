@@ -9,9 +9,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class AccessTokenRequest implements Query
 {
-  public function __construct(
+    public function __construct(
     #[NotBlank]
     public string $customerKey,
   ) {
-  }
+    }
 }

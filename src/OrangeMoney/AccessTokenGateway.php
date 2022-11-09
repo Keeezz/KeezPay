@@ -6,5 +6,5 @@ namespace KeezPay\OrangeMoney;
 
 interface AccessTokenGateway
 {
-  public function requestAccessToken(string $customerKey): ?AccessToken;
+    public function requestAccessToken(string $customerKey): ?AccessToken;
 }

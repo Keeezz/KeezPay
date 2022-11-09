@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace KeezPay\Tests\Application\Container;
 
-use Closure;
-use RuntimeException;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -13,59 +11,59 @@ use Psr\Container\ContainerInterface;
  */
 final class Container implements ContainerInterface
 {
-  /**
-   * @var array<class-string<T>, Closure>
-   */
-  private array $services = [];
+    /**
+     * @var array<class-string<T>, \Closure>
+     */
+    private array $services = [];
 
-  /**
-   * @var array<class-string<T>, T>
-   */
-  private array $instances = [];
+    /**
+     * @var array<class-string<T>, T>
+     */
+    private array $instances = [];
 
-  /**
-   * @return Container<T>
-   */
-  public function set(string $id, Closure $callback): self
-  {
-    if (!class_exists($id) && !interface_exists($id)) {
-      throw new RuntimeException(sprintf('"%s" does not exist', $id));
+    /**
+     * @return Container<T>
+     */
+    public function set(string $id, \Closure $callback): self
+    {
+        if (!class_exists($id) && !interface_exists($id)) {
+            throw new \RuntimeException(sprintf('"%s" does not exist', $id));
+        }
+
+        /**
+         * @var class-string<T> $id
+         */
+        if (!$this->has($id)) {
+            $this->services[$id] = $callback;
+        }
+
+        return $this;
     }
 
     /**
-     * @var class-string<T> $id
+     * @return T
      */
-    if (!$this->has($id)) {
-      $this->services[$id] = $callback;
+    public function get(string $id)
+    {
+        if (!class_exists($id) && !interface_exists($id)) {
+            throw new \RuntimeException(sprintf('"%s" does not exist', $id));
+        }
+
+        /**
+         * @var class-string<T> $id
+         */
+        if (!isset($this->instances[$id])) {
+            if (!isset($this->services[$id])) {
+                throw new \RuntimeException('Service not found: '.$id);
+            }
+            $this->instances[$id] = $this->services[$id]($this);
+        }
+
+        return $this->instances[$id];
     }
 
-    return $this;
-  }
-
-  /**
-   * @return T
-   */
-  public function get(string $id)
-  {
-    if (!class_exists($id) && !interface_exists($id)) {
-      throw new RuntimeException(sprintf('"%s" does not exist', $id));
+    public function has(string $id): bool
+    {
+        return isset($this->services[$id]);
     }
-
-    /**
-     * @var class-string<T> $id
-     */
-    if (!isset($this->instances[$id])) {
-      if (!isset($this->services[$id])) {
-        throw new RuntimeException('Service not found: ' . $id);
-      }
-      $this->instances[$id] = $this->services[$id]($this);
-    }
-
-    return $this->instances[$id];
-  }
-
-  public function has(string $id): bool
-  {
-    return isset($this->services[$id]);
-  }
 }

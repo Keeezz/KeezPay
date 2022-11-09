@@ -6,37 +6,37 @@ namespace KeezPay\OrangeMoney;
 
 final class AccessToken
 {
-  private string $tokenType;
+    private string $tokenType;
 
-  private string $value;
+    private string $value;
 
-  private int $expiresIn;
+    private int $expiresIn;
 
-  public static function create(
+    public static function create(
     string $tokenType,
     string $value,
     int $espireIn,
   ): self {
-    $accessToken = new self();
-    $accessToken->tokenType = $tokenType;
-    $accessToken->value = $value;
-    $accessToken->expiresIn = $espireIn;
+        $accessToken = new self();
+        $accessToken->tokenType = $tokenType;
+        $accessToken->value = $value;
+        $accessToken->expiresIn = $espireIn;
 
-    return $accessToken;
-  }
+        return $accessToken;
+    }
 
-  public function tokenType(): string
-  {
-    return $this->tokenType;
-  }
+    public function tokenType(): string
+    {
+        return $this->tokenType;
+    }
 
-  public function value(): string
-  {
-    return $this->value;
-  }
+    public function value(): string
+    {
+        return $this->value;
+    }
 
-  public function expiresIn(): int
-  {
-    return $this->expiresIn;
-  }
+    public function expiresIn(): int
+    {
+        return $this->expiresIn;
+    }
 }

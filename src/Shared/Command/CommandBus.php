@@ -6,5 +6,5 @@ namespace KeezPay\Shared\Command;
 
 interface CommandBus
 {
-  public function execute(Command $command): void;
+    public function execute(Command $command): void;
 }
